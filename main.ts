@@ -17,7 +17,7 @@ async function sha256(input: string, range: number = 1): Promise<string> {
 const app = new Hono();
 
 app.all("/", async (c) => {
-  const id = await sha256((Date.now() + (performance.now() + Math.random()) * 1000000000000).toString(36) + JSON.stringify(c.req.raw), 2);
+  const id = await sha256((Date.now() + (performance.now() + Math.random()) * 1000000000000).toString(36) + JSON.stringify(c.req.raw), Math.floor(Math.random() * 2) + 1);
 
   return c.text(id)
 });
