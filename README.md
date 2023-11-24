@@ -1,11 +1,2 @@
-# Hono Deno REST API Template
-
-A template of REST API app using [Hono](https://hono.dev/) framework
-
-```
-deno run --allow-net main.ts
-```
-
-This starts the server at http://localhost:8000/
-
-Try go to http://localhost:8000/api/Brachiosaurus or http://localhost:8000/api/
+# Unique Id
+絶対に被らないことを保証する文字列(id)を返す API
