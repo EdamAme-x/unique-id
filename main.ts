@@ -3,7 +3,9 @@ import { Hono } from "https://deno.land/x/hono@v3.4.1/mod.ts";
 const app = new Hono();
 
 app.all("/", (c) => {
-  let id = Date.now() + performance.now();
+  let id = (Date.now() + performance.now() + Math.random()).toString(36);
+
+  return c.text(id)
 });
 
 Deno.serve(app.fetch);
