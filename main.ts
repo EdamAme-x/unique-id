@@ -2,16 +2,22 @@ import { Hono } from "https://deno.land/x/hono@v3.4.1/mod.ts";
 import { toHashString } from "https://deno.land/std@0.188.0/crypto/to_hash_string.ts";
 
 const encoder = new TextEncoder();
-async function sha256(input: string): Promise<string> {
+async function sha256(input: string, range: number = 1): Promise<string> {
   const data = encoder.encode(input);
   const digest = await crypto.subtle.digest("SHA-256", data);
-  return toHashString(digest);
+  let result = toHashString(digest);
+
+  if (number !== 1) {
+    result = await sha256(result);
+  }
+
+  return result;
 }
 
 const app = new Hono();
 
 app.all("/", async (c) => {
-  let id = await sha256((Date.now() + (performance.now() + Math.random()) * 1000000000000).toString(36) + JSON.stringify(c.req.raw));
+  const id = await sha256((Date.now() + (performance.now() + Math.random()) * 1000000000000).toString(36) + JSON.stringify(c.req.raw), 10);
 
   return c.text(id)
 });
