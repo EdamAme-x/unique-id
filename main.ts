@@ -7,7 +7,7 @@ async function sha256(input: string, range: number = 1): Promise<string> {
   const digest = await crypto.subtle.digest("SHA-256", data);
   let result = toHashString(digest);
 
-  if (number !== 1) {
+  if (range !== 1) {
     result = await sha256(result);
   }
 
